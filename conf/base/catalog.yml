@@ -10,6 +10,7 @@ raw_health_camp_detail:
   <<: *raw_csv
   filepath: data/01_raw/Health_Camp_Detail.csv
   load_args:
+    index_col: Health_Camp_ID
     na_values: None
     parse_dates:
       - Camp_Start_Date
@@ -19,6 +20,9 @@ raw_train:
   <<: *raw_csv
   filepath: data/01_raw/Train.csv
   load_args:
+    index_col:
+      - Patient_ID
+      - Health_Camp_ID
     parse_dates:
       - Registration_Date
 
@@ -26,6 +30,7 @@ raw_patient_profile:
   <<: *raw_csv
   filepath: data/01_raw/Patient_Profile.csv
   load_args:
+    index_col: Patient_ID
     na_values: None
     parse_dates:
       - First_Interaction
@@ -33,18 +38,40 @@ raw_patient_profile:
 raw_first_health_camp_attended:
   <<: *raw_csv
   filepath: data/01_raw/First_Health_Camp_Attended.csv
+  load_args:
+    index_col:
+      - Patient_ID
+      - Health_Camp_ID
 
 raw_second_health_camp_attended:
   <<: *raw_csv
   filepath: data/01_raw/Second_Health_Camp_Attended.csv
+  load_args:
+    index_col:
+      - Patient_ID
+      - Health_Camp_ID
 
 raw_third_health_camp_attended:
   <<: *raw_csv
   filepath: data/01_raw/Third_Health_Camp_Attended.csv
+  load_args:
+    index_col:
+      - Patient_ID
+      - Health_Camp_ID
 
 raw_test:
   <<: *raw_csv
   filepath: data/01_raw/test.csv
   load_args:
+    index_col:
+      - Patient_ID
+      - Health_Camp_ID
     parse_dates:
       - Registration_Date
+
+{% for subset in ['train', 'test'] %}
+{{ subset }}.prm_joined:
+  type: pandas.ParquetDataSet
+  filepath: data/03_prm/joined/{{ subset }}/prm-joined.parquet.snappy
+  layer: primary
+{% endfor %}
