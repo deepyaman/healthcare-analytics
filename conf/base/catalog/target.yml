@@ -1,0 +1,9 @@
+# This is a boilerplate catalog config generated for pipeline 'target'
+# using Kedro 0.16.6.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/04_user_guide/04_data_catalog.html
+tgt_health_camp_outcome_favorable:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/health-camp-outcome-favorable/tgt-health-camp-outcome-favorable.parquet.snappy
+  layer: feature

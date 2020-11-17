@@ -36,7 +36,7 @@ from kedro.io import DataCatalog
 from kedro.pipeline import Pipeline, pipeline
 from kedro.versioning import Journal
 
-from healthcare_analytics.pipelines import feature
+from healthcare_analytics.pipelines import feature, target
 
 
 def _load_config(config_files: List[Path]) -> Dict[str, Any]:
@@ -96,6 +96,7 @@ class ProjectHooks:
 
         """
         feature_pipeline = feature.create_pipeline()
+        target_pipeline = target.create_pipeline()
 
         return {
             "__default__": Pipeline(
@@ -118,6 +119,7 @@ class ProjectHooks:
                         },
                         namespace="test",
                     ),
+                    target_pipeline,
                 ]
             )
         }

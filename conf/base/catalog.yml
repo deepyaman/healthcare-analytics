@@ -68,10 +68,3 @@ raw_test:
       - Health_Camp_ID
     parse_dates:
       - Registration_Date
-
-{% for subset in ['train', 'test'] %}
-{{ subset }}.prm_joined:
-  type: pandas.ParquetDataSet
-  filepath: data/03_prm/joined/{{ subset }}/prm-joined.parquet.snappy
-  layer: primary
-{% endfor %}
