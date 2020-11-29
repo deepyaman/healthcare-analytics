@@ -11,7 +11,6 @@ raw_health_camp_detail:
   filepath: data/01_raw/Health_Camp_Detail.csv
   load_args:
     index_col: Health_Camp_ID
-    na_values: None
     parse_dates:
       - Camp_Start_Date
       - Camp_End_Date
@@ -32,6 +31,7 @@ raw_patient_profile:
   load_args:
     index_col: Patient_ID
     na_values: None
+    keep_default_na: false
     parse_dates:
       - First_Interaction
 
